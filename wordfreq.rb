@@ -13,6 +13,7 @@ class Wordfreq
       @docHash[word].nil? ? @docHash[word] = 1 : @docHash[word] += 1
     end
   }
+    @docHash.sort
   end
 
   def frequency(word)
@@ -28,9 +29,14 @@ class Wordfreq
   end
 
   def top_words(number)
+    @docHash.sort_by{|k,v| [-v]}.take(number).map{|k,v| [k,v]}
   end
 
   def print_report
+    list = top_words(10)
+    maxLength = list.sort_by{ |k,v| -k.length}.map{|k,v| k}.take(1)[0].length
+    list.each {|k,v|
+      puts "#{" "*(maxLength-k.length)}#{k}  | #{v} #{"*"*v}"}
   end
 end
 

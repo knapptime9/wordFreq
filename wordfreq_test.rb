@@ -32,7 +32,7 @@ class WordfreqTest < Minitest::Test
     wf = Wordfreq.new fullpath('seneca_falls.txt')
     top_words = wf.top_words(5)
     assert_equal [
-      ["her", 33], ["all", 12], ["which", 12], ["they", 7], ["their", 7]
+      ["her", 33], ["all", 12], ["which", 12], ["she", 7], ["they", 7]
     ], top_words
 
     wf = Wordfreq.new fullpath('emancipation_proclamation.txt')
@@ -44,16 +44,16 @@ class WordfreqTest < Minitest::Test
 
   def test_report
     expected_output = <<EOF
-    her | 33 *********************************
-    all | 12 ************
-  which | 12 ************
-   they | 7  *******
-  their | 7  *******
-    she | 7  *******
-   this | 6  ******
-   them | 6  ******
-  women | 6  ******
- rights | 6  ******
+   her  | 33 *********************************
+   all  | 12 ************
+ which  | 12 ************
+   she  | 7 *******
+  they  | 7 *******
+ their  | 7 *******
+rights  | 6 ******
+  this  | 6 ******
+ women  | 6 ******
+ right  | 6 ******
 EOF
 
     wf = Wordfreq.new fullpath('seneca_falls.txt')
