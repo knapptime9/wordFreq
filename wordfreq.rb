@@ -4,12 +4,15 @@ class Wordfreq
     'were', 'will', 'with']
 
   def initialize(filename)
-    document = File.foreach(filename).map { |line| line.split(' ') }
-    # p document.length
-    # p document.flatten
-    # document = document.each_line {|line|}
-    p document
-    p document.class
+    document = File.read(filename)
+    document = document.downcase.gsub(/[^a-z ]/, ' ').split(" ")
+    docHash = Hash.new
+    document.each {|word|
+    if STOP_WORDS.include?(word)
+    else
+      docHash[word].nil? ? docHash[word] = 1 : docHash[word] += 1
+    end
+  }
   end
 
   def frequency(word)
